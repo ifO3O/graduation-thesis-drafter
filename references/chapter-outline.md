@@ -1,32 +1,32 @@
 # Thesis Chapter Outline
 
-## Recommended Chapter Structure
-1. 摘要与关键词
-2. 绪论（背景、问题定义、研究目标）
-3. 相关工作或需求分析
-4. 系统总体设计（架构、模块边界、技术选型）
-5. 关键实现（核心流程、关键算法、工程细节）
-6. 实验与评测（数据集、指标定义、实验设置、结果分析）
-7. 风险、局限与改进方向
-8. 结论与展望
+## Recommended Structure
+1. Abstract and keywords
+2. Introduction (background, problem, goals)
+3. Requirements analysis or related work
+4. Overall system design
+5. Key implementation details
+6. Evaluation and experiments
+7. Risks, limitations, and improvements
+8. Conclusion and future work
 
 ## Writing Rules
-1. 每章按“目标 -> 方法 -> 实现 -> 结果 -> 小结”展开。
-2. 每个核心结论至少提供一条仓库证据（代码、配置、文档、测试或日志）。
-3. 评测章节必须写清指标定义、计算方式、样本来源和误差解释。
-4. 对未完成能力使用“规划中”标识，避免写成已上线事实。
-5. 对缺乏证据但可能成立的判断使用“待补证据”标识。
+1. Follow chapter flow: goal -> method -> implementation -> result -> summary.
+2. Back each major technical claim with repository evidence.
+3. In evaluation chapter, define metrics, data source, and interpretation method.
+4. Mark unfinished capability as `planned`.
+5. Mark uncertain claims as `TBD_EVIDENCE`.
 
-## Suggested Length (for 1.0万-1.5万字论文)
-1. 摘要：300-500字
-2. 绪论：1200-1800字
-3. 设计与实现：3500-5000字
-4. 实验与评测：1800-2800字
-5. 结论与展望：600-1000字
+## Suggested Length (10k-15k Chinese words)
+1. Abstract: 300-500
+2. Introduction: 1200-1800
+3. Design and implementation: 3500-5000
+4. Evaluation and testing: 1800-2800
+5. Conclusion: 600-1000
 
-## Evidence Checklist by Chapter
-1. 绪论：项目背景与目标是否来自需求文档或README。
-2. 设计：架构图与模块描述是否能在目录结构和配置文件中验证。
-3. 实现：关键流程是否有函数/类/接口证据。
-4. 评测：指标与结果是否有原始表格或脚本输出支撑。
-5. 局限：是否对应真实问题单、已知缺陷或待办列表。
+## Chapter Validation Checklist
+1. Introduction: project goals and scope are evidence-backed.
+2. Design: architecture claims map to directory/module/config artifacts.
+3. Implementation: key flows map to functions/classes/interfaces.
+4. Evaluation: metrics map to scripts or result reports.
+5. Limitations: points map to real open issues or readiness gaps.
