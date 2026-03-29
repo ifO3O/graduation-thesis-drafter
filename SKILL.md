@@ -60,6 +60,8 @@ python shared-skills/graduation-thesis-drafter/scripts/render_thesis_docx.py \
   --cover-docx "<optional-cover.docx>"
 ```
 
+Add `--number-sections` only when heading numbers are not already present in markdown.
+
 ## Environment Requirements
 1. Python package: `python-docx`.
 2. `pandoc` available in PATH for markdown-to-DOCX conversion.

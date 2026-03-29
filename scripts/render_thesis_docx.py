@@ -293,7 +293,13 @@ def apply_spec_to_docx(docx_path: Path, spec: dict[str, Any]) -> None:
     doc.save(str(docx_path))
 
 
-def run_pandoc(markdown: Path, template_docx: Path, output_docx: Path, pandoc_path: str | None) -> None:
+def run_pandoc(
+    markdown: Path,
+    template_docx: Path,
+    output_docx: Path,
+    pandoc_path: str | None,
+    number_sections: bool,
+) -> None:
     pandoc = ensure_pandoc(pandoc_path)
     cmd = [
         pandoc,
@@ -304,8 +310,9 @@ def run_pandoc(markdown: Path, template_docx: Path, output_docx: Path, pandoc_pa
         str(template_docx),
         "--toc",
         "--toc-depth=3",
-        "--number-sections",
     ]
+    if number_sections:
+        cmd.append("--number-sections")
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         raise SystemExit(f"pandoc failed:\n{result.stderr.strip()}")
@@ -319,6 +326,11 @@ def main() -> int:
     parser.add_argument("--style-spec-json", help="Optional pre-generated style spec JSON")
     parser.add_argument("--cover-docx", help="Optional cover DOCX to copy beside output")
     parser.add_argument("--pandoc", help="Optional explicit path to pandoc executable")
+    parser.add_argument(
+        "--number-sections",
+        action="store_true",
+        help="Enable pandoc automatic section numbering",
+    )
     args = parser.parse_args()
 
     markdown = Path(args.markdown).resolve()
@@ -331,7 +343,7 @@ def main() -> int:
         raise SystemExit(f"Template DOCX not found: {template_docx}")
 
     output_docx.parent.mkdir(parents=True, exist_ok=True)
-    run_pandoc(markdown, template_docx, output_docx, args.pandoc)
+    run_pandoc(markdown, template_docx, output_docx, args.pandoc, args.number_sections)
 
     if args.style_spec_json:
         spec = load_spec_from_json(Path(args.style_spec_json).resolve())
@@ -345,8 +357,11 @@ def main() -> int:
         cover = Path(args.cover_docx).resolve()
         if cover.exists():
             cover_out = output_docx.with_name(output_docx.stem + "_相关资料封面.docx")
-            shutil.copy2(cover, cover_out)
-            print(f"Copied cover DOCX: {cover_out}")
+            try:
+                shutil.copy2(cover, cover_out)
+                print(f"Copied cover DOCX: {cover_out}")
+            except Exception as exc:
+                print(f"Cover copy failed, skipped: {exc}")
         else:
             print(f"Cover DOCX not found, skipped: {cover}")
 
