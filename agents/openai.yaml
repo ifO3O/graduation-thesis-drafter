@@ -1,0 +1,4 @@
+interface:
+  display_name: "Graduation Thesis Drafter"
+  short_description: "Draft evidence-backed graduation theses from real repos"
+  default_prompt: "Generate a Chinese graduation thesis first draft from this repository. Keep each core claim traceable to code/docs evidence, include measurable metrics, and provide a chaptered markdown output with an evidence appendix."
